@@ -1,0 +1,16 @@
+embedder:
+  provider: ollama
+  config:
+    model: all-minilm:latest 
+llm:
+  provider: groq
+  config:
+    model: llama-3.1-8b-instant
+    api_key:  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
+    stream: True
+vectordb:
+  provider: chroma
+  config:
+    collection_name: 'report_data'
+    dir: ReportData
+    allow_reset: true
