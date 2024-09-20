@@ -59,7 +59,7 @@ poetry run uvicorn main:app --reload
 Navigate to the frontend directory and install the Node.js dependencies:
 
 ```bash
-cd frontend
+cd insta-report
 npm install
 
 npm run dev
