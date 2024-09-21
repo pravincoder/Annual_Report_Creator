@@ -1,0 +1,94 @@
+/* General page styles */
+.pageContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    color: #444;
+  }
+  
+  .highlight {
+    color: #ff6b6b;
+  }
+  
+  .tagline {
+    font-size: 1.4rem;
+    color: #666;
+  }
+  
+  .section {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 700px;
+    width: 100%;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .fileList {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+  }
+  
+  .fileItem {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Styling for the generate report button */
+  .generateButton {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .generateButton:hover {
+    background-color: #ff4747;
+  }
+  
+  .generateButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .editorSection {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .editorTitle {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
