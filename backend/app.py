@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from PyPDF2 import PdfMerger
-from backend.Crew import report_crew
+from Crew import report_crew
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
