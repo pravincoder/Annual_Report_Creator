@@ -1,23 +1,29 @@
-import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
+import { marked } from 'marked';
+import styles from '../styles/report.module.css';
+import { useState } from 'react';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-
-const ReportEditor = ({ report, setReport }) => {
-  const handleChange = (content) => {
-    setReport(content);
-  };
+const ReportReader = ({ report }) => {
+  const [showPreview, setShowPreview] = useState(true); // Always show the preview
 
   return (
-    <div>
-      <ReactQuill
-        theme="snow"
-        value={report}
-        onChange={handleChange}
-        placeholder="Your AI-Generated Report will appear here......"
-      />
+    <div className={styles['report-reader-container']}>
+      <div className={styles.toolbar}>
+        <button 
+          onClick={() => setShowPreview(!showPreview)} 
+          className={styles['toggle-preview-btn']}
+        >
+          {showPreview ? 'Hide Preview' : 'Show Preview'}
+        </button>
+      </div>
+
+      {showPreview && (
+        <div 
+          className={styles['markdown-preview']} 
+          dangerouslySetInnerHTML={{ __html: marked(report) }} 
+        />
+      )}
     </div>
   );
 };
 
-export default ReportEditor;
+export default ReportReader;

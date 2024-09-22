@@ -1,0 +1,53 @@
+.report-editor-container {
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-bottom: 10px; /* Add space below the button */
+  }
+  
+  .toggle-preview-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid transparent; /* Transparent border */
+    border-radius: 5px;
+    background-color: #0070f3;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+  }
+  
+  .toggle-preview-btn:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.5); /* Add a light border on hover */
+  }
+  
+  .markdown-preview {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: auto;
+  }
+  
+  .markdown-preview h1,
+  .markdown-preview h2,
+  .markdown-preview h3 {
+    margin: 0;
+    padding: 10px 0;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .markdown-preview p {
+    margin: 0;
+    line-height: 1.6;
+    font-family: 'Courier New', Courier, monospace,'Georgia',serif;
+  }
+  

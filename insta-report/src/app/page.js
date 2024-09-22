@@ -18,7 +18,7 @@ export default function MyPage() {
 
   // Function to handle report generation
   const handleGenerateReport = async () => {
-    if (uploadedFiles.length === 0) return;
+    if (uploadedFiles.length === 0) return alert('Please upload a file first');
   
     setIsReportGenerating(true); // Set loading state
     const formData = new FormData();

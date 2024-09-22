@@ -1,24 +1,21 @@
 from crewai import Agent, Crew, Process, Task
 from crewai_tools import PDFSearchTool,RagTool
-from dotenv import load_dotenv
 
-import os
 from langchain_groq import ChatGroq
 from textwrap import dedent
 from flask import Flask, request, jsonify
-load_dotenv()
-from embedchain import App
-llm=ChatGroq(model="llama-3.1-8b-instant",stop_sequences=['\n','END'])
-app = App.from_config(config_path="config.yaml")
 
-def report_crew(file_path:str):
+import os
+llm=ChatGroq(model="llama-3.1-70b-versatile",api_key=os.getenv('GROQ_API_KEY'))
+
+def report_crew(file_path:str)->str:
     # --- Tools ---
     pdf_search_tool = PDFSearchTool(
         name = "Report Data",
         description = "Extracting Data from different PDFs",
         config=dict(
             embedder=dict(provider="ollama", config=dict(model="all-minilm:latest")),
-        ),
+            llm=dict(provider="groq",config=dict(model="llama-3.1-70b-versatile",api_key=os.getenv('GROQ_API_KEY'))),),
         pdf=file_path,
     )
 
@@ -50,7 +47,7 @@ def report_crew(file_path:str):
             clear and  based on the provided information.
             """
         ),
-        tools=[],
+        tools=[pdf_search_tool],
         llm = llm
     )
 
@@ -59,7 +56,7 @@ def report_crew(file_path:str):
         description=dedent(
             f"""
             Create an Annual Report from the pdf provided .
-            The report should be in markdown format and should have multiple sections,proper headings.
+            The report should be in Markdown format and should have multiple sections,proper headings.
             Try to include as much relevant information as possible from the PDF.
             Some must include sections are: Page
             Here is the User Required Annual Report Template:
@@ -77,10 +74,10 @@ def report_crew(file_path:str):
     markdown_report_task = Task(
         description=
             dedent(f"""
-            Your Task is to create a Markdown Annual Report , based on the information provided by the research agent and tasks.
+            Your Task is to create a Markdown based Annual Report ,on the information provided by the research agent and tasks.
             You should make a report with Multiple Pages and sections.
+            If you get same information take it once and move ahead.
             Here is the User Required Annual Report Template: 
-
             Here is a sample of some template you can use:-
             #Cover Page
             - Title of the Report
@@ -111,12 +108,6 @@ def report_crew(file_path:str):
             #  Conclusion(if applicable)
                 - Conclusion of the Report
                     - page number :- according to the content
-            # References(if applicable)
-                - References of the Report
-                    - page number :- according to the content
-            # Appendix(if applicable)
-                - Appendix of the Report
-                    - page number :- according to the content
             # Glossary(if applicable)
                 - Glossary of the Report
                     - page number :- according to the content
@@ -125,7 +116,6 @@ def report_crew(file_path:str):
                     - page number :- according to the content 
 
         You can add and remove sections if you think it is necessary. Just make sure to include all the important information/events .
-
             """
         ),
         expected_output="""
@@ -142,7 +132,9 @@ def report_crew(file_path:str):
         process=Process.sequential,
     )
 
-
     result = crew.kickoff()
+    
+    return result
+
 
 
