@@ -1,29 +1,27 @@
-import { marked } from 'marked';
-import styles from '../styles/report.module.css';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
+import styles from '../styles/report.module.css'; // Create a new CSS file for styling
 
-const ReportReader = ({ report }) => {
-  const [showPreview, setShowPreview] = useState(true); // Always show the preview
-
+export default function ReportEditor({ reportHtml }) {
   return (
-    <div className={styles['report-reader-container']}>
-      <div className={styles.toolbar}>
-        <button 
-          onClick={() => setShowPreview(!showPreview)} 
-          className={styles['toggle-preview-btn']}
-        >
-          {showPreview ? 'Hide Preview' : 'Show Preview'}
-        </button>
+    <motion.section
+      className={styles.editorSection}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.7, duration: 0.8, ease: 'easeOut' }}
+    >
+      <h2 className={styles.editorTitle}>Generated Report</h2>
+      
+      {/* Options for actions like download or export */}
+      <div className={styles.actionBar}>
+        <button className={styles.actionButton}>Download as PDF</button>
+        <button className={styles.actionButton}>Share Report</button>
       </div>
 
-      {showPreview && (
-        <div 
-          className={styles['markdown-preview']} 
-          dangerouslySetInnerHTML={{ __html: marked(report) }} 
-        />
-      )}
-    </div>
+      {/* Render the compiled HTML safely */}
+      <div
+        dangerouslySetInnerHTML={{ __html: reportHtml }}
+        className={styles.reportOutput}
+      />
+    </motion.section>
   );
-};
-
-export default ReportReader;
+}

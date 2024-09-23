@@ -1,48 +1,56 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import FileUploader from './components/FileUploader'; // FileUploader component
-import ReportEditor from './components/ReportEditor'; // ReportEditor component
-import Navbar from './components/Navbar'; // Navbar component
+import FileUploader from './components/FileUploader';
+import Navbar from './components/Navbar';
+import ReportEditor from './components/ReportEditor'; // Import the new ReportEditor component
 import styles from './styles/page.module.css';
 
 export default function MyPage() {
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [report, setReport] = useState('');
-  const [isReportGenerating, setIsReportGenerating] = useState(false); // State to show loading
+  const [reportHtml, setReportHtml] = useState('');
+  const [isReportGenerating, setIsReportGenerating] = useState(false);
 
-  // Function to handle file upload
+  // Function to handle file upload (update)
   const handleFileUpload = (file) => {
-    setUploadedFiles((prevFiles) => [...prevFiles, file]);
+    setUploadedFiles((prevFiles) => [...prevFiles, file]); // Append new file
   };
 
-  // Function to handle report generation
+  // Function to handle report generation (no changes)
   const handleGenerateReport = async () => {
     if (uploadedFiles.length === 0) return alert('Please upload a file first');
-  
+
     setIsReportGenerating(true); // Set loading state
     const formData = new FormData();
-  
+
     uploadedFiles.forEach((file) => {
       formData.append('files', file);
     });
-  
+
     try {
       const response = await fetch('http://localhost:8000/report/', {
         method: 'POST',
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to generate report');
       }
-  
+
       const data = await response.json();
       if (data.error) {
         console.error('Error:', data.error);
       } else {
-        setReport(data.report);
-        console.log(report)// Update the editor with the generated report
+        let cleanedHtml = data.report;
+        if (cleanedHtml.startsWith('```html')) {
+          cleanedHtml = cleanedHtml.replace(/^```html/, '').trim(); // Remove the opening tag
+        }
+        if (cleanedHtml.endsWith('```')) {
+          cleanedHtml = cleanedHtml.replace(/```$/, '').trim(); // Remove the closing tag
+        }
+
+        setReportHtml(cleanedHtml); // Store the cleaned HTML code in state
+        console.log(cleanedHtml); // For debugging purposes
       }
     } catch (error) {
       console.error('Error generating report:', error);
@@ -81,10 +89,8 @@ export default function MyPage() {
         transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
       >
         <h2 className={styles.sectionTitle}>Select PDF Files to Upload</h2>
-        {/* FileUploader Component */}
         <FileUploader onFileUpload={handleFileUpload} />
 
-        {/* Display uploaded files */}
         {uploadedFiles.length > 0 && (
           <>
             <ul className={styles.fileList}>
@@ -95,13 +101,12 @@ export default function MyPage() {
               ))}
             </ul>
 
-            {/* Generate Report Button */}
             <motion.button
               className={styles.generateButton}
               onClick={handleGenerateReport}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              disabled={isReportGenerating} // Disable button while loading
+              disabled={isReportGenerating}
             >
               {isReportGenerating ? 'Generating Report...' : 'Generate Report'}
             </motion.button>
@@ -109,16 +114,8 @@ export default function MyPage() {
         )}
       </motion.section>
 
-      {/* Report Editor Section */}
-      <motion.section
-        className={styles.editorSection}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.8, ease: 'easeOut' }}
-      >
-        <h2 className={styles.editorTitle}>Generated Report</h2>
-        <ReportEditor report={report} setReport={setReport} />
-      </motion.section>
+      {/* Render the ReportEditor component */}
+      {reportHtml && <ReportEditor reportHtml={reportHtml} />}
     </div>
   );
 }
