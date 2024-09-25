@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "Annual-Report-Maker"
 version = "0.1.0"
-description = ""
+description = "A tool to generate reports from a given data source."
 authors = ["Pravin <PravinCoder@gmail.com>"]
 
 [tool.poetry.dependencies]

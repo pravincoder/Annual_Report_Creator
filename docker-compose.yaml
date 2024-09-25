@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    container_name: fastapi_backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env  # Point to your .env file
+    environment:
+      - POETRY_VIRTUALENVS_CREATE=false
+    volumes:
+      - ./backend:/backend  # Change to /backend to match the WORKDIR in the Dockerfile
+    command: poetry run uvicorn app:app --host 0.0.0.0 --port 8000
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ./insta-report
+      dockerfile: Dockerfile.frontend
+    container_name: nextjs_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://fastapi_backend:4000  # Use the service name
+    volumes:
+      - ./insta-report:/app
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

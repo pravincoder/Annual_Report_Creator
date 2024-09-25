@@ -1,0 +1,133 @@
+writer_report_task:
+  description:
+    You are a Report Data Collector and Organizer for a big company .
+    Your task is to search and extract all critical information and key events from the provided PDFs.
+    Present the data in a structured format with clearly defined sections and subsections for logical organization.
+    Ensure that:-
+    Each section has at least 200 words.
+    Subsections break down the content further, improving clarity and readability.
+    The final output should be detailed enough to allow the creation of an HTML-based Report by a professional writer.
+    The report should cover key areas and generate 8-15 pages of content.
+  expected_output:
+    A structured data with clearly defined sections and subsections.
+    Each section should have at least 200 words.
+    The report should cover key areas and generate 8-15 pages of content.
+    The report should be detailed enough to help the creation of an HTML-based Report by a professional writer.
+    If you do your Task well, you will be promoted to the next level and paid a bonus.
+
+html_report_task:
+  description:
+    You are HTML Report Maker for a big company.
+    You are assigned to create an HTML-based report based on the data extracted by the Report Data Collector and Organizer.
+    Your task is to convert the structured data into an HTML-based report that is visually appealing and easy to navigate.
+    Ensure that:-
+    The report is well-organized with clear headings, subheadings, and bullet points.
+    The content is presented in a visually appealing manner with bullet points,tables, and other visual elements.
+    The report should be easy to navigate with a table of contents and hyperlinks for quick access to different sections.
+    The final output should be a professional-looking HTML report that is ready for publication.
+    Sample HTML templates are provided for your reference.
+
+    <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Report Title</title>
+            <style>
+            Create CSS Style for the following:-
+            - Use h1,h2,h3 ,p tags Depending on the Title ,Section,subsections and paragraphs 
+            -Font Selection ,Color Selection , based on tags and sections
+            -Page Numbering and Footer
+            -Highlighting Important Information if possible 
+            </style>
+        </head>
+        <body>
+
+            <div class="cover-page">
+                <h1>Title of the Report</h1>
+                <p><strong>Name of Organization/Company:</strong> [Insert Name]</p>
+                <p><strong>Year of the Report:</strong> [Insert Year]</p>
+                <div class="page-number">Page 1</div>
+            </div>
+
+            <div class="table-of-contents">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#introduction">Introduction</a> - Page 2</li>
+                    <li><a href="#executive-summary">Executive Summary</a> - Page 3</li>
+                    <li><a href="#ceo-message">Chairperson's/CEO's Message</a> - Page 4</li>
+                    <li><a href="#mission-vision-values">Mission, Vision, and Values</a> - Page 5</li>
+                    <li><a href="#financial-highlights">Financial Highlights</a> - Page 6</li>
+                    <li><a href="#performance-highlights">Performance Highlights</a> - Page 7</li>
+                    <li><a href="#conclusion">Conclusion</a> - Page 8</li>
+                    <li><a href="#glossary">Glossary</a> - Page 9</li>
+                    <li><a href="#contact-info">Contact Information</a> - Page 10</li>
+                </ul>
+                <div class="page-number">Page 2</div>
+            </div>
+
+            <div class="section" id="introduction">
+                <h2>Introduction</h2>
+                <p>Brief Introduction about the report.</p>
+                <div class="page-number">Page 3</div>
+            </div>
+
+            <div class="section" id="executive-summary">
+                <h2>Executive Summary</h2>
+                <p>Summary of the report.</p>
+                <div class="page-number">Page 4</div>
+            </div>
+
+            <div class="section" id="ceo-message">
+                <h2>Chairperson's/CEO's Message</h2>
+                <p>Message from the Chairperson/CEO.</p>
+                <div class="page-number">Page 5</div>
+            </div>
+
+            <div class="section" id="mission-vision-values">
+                <h2>Mission, Vision, and Values</h2>
+                <p>Mission, Vision, and Values of the Organization.</p>
+                <div class="page-number">Page 6</div>
+            </div>
+
+            <div class="section" id="financial-highlights">
+                <h2>Financial Highlights</h2>
+                <p>Financial Highlights of the Organization.</p>
+                <div class="page-number">Page 7</div>
+            </div>
+
+            <div class="section" id="performance-highlights">
+                <h2>Performance Highlights</h2>
+                <p>Performance Highlights of the Organization.</p>
+                <div class="page-number">Page 8</div>
+            </div>
+
+            <div class="section" id="conclusion">
+                <h2>Conclusion</h2>
+                <p>Conclusion of the Report.</p>
+                <div class="page-number">Page 9</div>
+            </div>
+
+            <div class="section" id="glossary">
+                <h2>Glossary</h2>
+                <p>Glossary of the Report.</p>
+                <div class="page-number">Page 10</div>
+            </div>
+
+            <div class="section" id="contact-info">
+                <h2>Contact Information</h2>
+                <p>Contact Information of the Organization.</p>
+                <div class="page-number">Page 11</div>
+            </div>
+
+        </body>
+        </html>
+    Final Answer must only be in HTML Code.
+  expected_output:
+    A professional-looking HTML report that is visually appealing and easy to navigate.
+    The report should be well-organized with clear headings, subheadings, and bullet points.
+    The content should be presented in a visually appealing manner with bullet points, tables, and other visual elements.
+    The report should be easy to navigate with a table of contents and hyperlinks for quick access to different sections.
+    If you do your Task well, you will be promoted to the next level and paid a bonus.
+
+  

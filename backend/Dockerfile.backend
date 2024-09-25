@@ -1,0 +1,29 @@
+# Dockerfile.backend
+
+# Use an official Python image as a base
+FROM python:3.10-slim
+
+# Set the working directory
+WORKDIR /backend
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y curl build-essential
+
+# Install Poetry and add it to the PATH
+RUN curl -sSL https://install.python-poetry.org | python3 - && \
+    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+
+# Copy the pyproject.toml and poetry.lock files
+COPY pyproject.toml poetry.lock ./
+
+# Install dependencies with Poetry (no dev dependencies and no virtual environment creation)
+RUN poetry config virtualenvs.create false && poetry install --no-dev
+
+# Copy the rest of the code
+COPY . .
+
+# Expose the port FastAPI will run on
+EXPOSE 8000
+
+# Run FastAPI
+CMD ["poetry", "run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
